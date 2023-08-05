@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import API from "../utils/API";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -20,6 +20,12 @@ export default function SignIn() {
       [e.target.name]: e.target.value 
     })
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isEmailValid && isPasswordValid) {
+      console.log("유효성 검사 통과");
+    }
+  };
 
   const validateEmail = () => {
     const isValid = form.email.includes("@");
@@ -32,14 +38,23 @@ export default function SignIn() {
   const isEmailValid = validateEmail();
   const isPasswordValid = validatePassword();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (isEmailValid && isPasswordValid) {
-      console.log("유효성 검사 통과");
-    }
-  };
-
   const isSubmitDisabled = !validateEmail() || !validatePassword();
+
+  const signInApi = ({ form }) => {
+    const userData = {
+      email: `${form.email}`,
+      password: `${form.password}`,
+    };
+    API.post('/auth/signin', userData)
+        .then((response) => {
+            if(response.status === 200) {
+              const accessToken = response.data['access_token'];
+              localStorage.setItem("accessToken", accessToken);
+              navigate('/todo');
+            }
+        })
+        .catch((error) => console.log(error.response));
+  };
 
   return (
     <div className="flex justify-center items-center w-full h-screen">
@@ -75,6 +90,7 @@ export default function SignIn() {
             className={`border rounded-lg box-border py-1 cursor-pointer w-1/2 text-white ${isSubmitDisabled ? 'bg-gray-300' : 'bg-blue-800'}`}
             data-testid="signin-button"
             disabled={isSubmitDisabled}
+            onClick={() => signInApi({form})}
           >
             Login
           </button>

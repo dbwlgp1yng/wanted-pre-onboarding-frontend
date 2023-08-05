@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import API from "../utils/API";
 
 export default function SignUp() {
@@ -8,7 +7,6 @@ export default function SignUp() {
   const [form, setForm] = useState({
     email: "",
     password: "",
-    // confirmPassword: "",
   });
 
   const handleChange = (e) => {
@@ -16,6 +14,9 @@ export default function SignUp() {
       ...form, 
       [e.target.name]: e.target.value 
     })
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   const validateEmail = () => {
@@ -26,14 +27,6 @@ export default function SignUp() {
     const isValid = form.password.length >= 8;
     return isValid;
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // if(form.password !== form.confirmPassword) {
-    //   return alert('비밀번호가 일치하지 않습니다.');
-    // }
-  };
-
   const isSubmitDisabled = !validateEmail() || !validatePassword();
 
   const signUpApi = ({ form }) => {
