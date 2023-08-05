@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-//import { useNavigate } from "react-router-dom";
-import { signUpApi } from "../api/signUpApi"; 
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import API from "../utils/API";
 
 export default function SignUp() {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -34,12 +35,28 @@ export default function SignUp() {
   };
 
   const isSubmitDisabled = !validateEmail() || !validatePassword();
+
+  const signUpApi = ({ form }) => {
+    const userData = {
+      email: `${form.email}`,
+      password: `${form.password}`,
+    };
+    API.post('/auth/signup', userData)
+        .then((response) => {
+            if(response.status === 201) {
+              navigate('/signin');
+            }
+        })
+        .catch((error) => console.log(error.response));
+  };
+  
   return (
     <div className="flex justify-center items-center w-full h-screen">
       <form className="flex flex-col w-1/4" onSubmit={handleSubmit}>
-        <div>
+        <div className="flex flex-col w-full mb-2">
           <label htmlFor="userEmail">이메일</label>
           <input
+            className="border rounded-lg px-2 py-1 text-sm"
             type="text"
             id="userEmail"
             name="email"
@@ -49,9 +66,10 @@ export default function SignUp() {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="flex flex-col mb-2">
           <label htmlFor="userPassword">비밀번호</label>
           <input
+            className="border rounded-lg px-2 py-1 text-sm"
             type="password"
             name="password"
             id="userPassword"
@@ -60,23 +78,20 @@ export default function SignUp() {
             placeholder="비밀번호를 입력해주세요."
             onChange={handleChange}
           />
-          {/* <input
-            type="password"
-            name="confirmPassword"
-            value={form.confirmPassword}
-            placeholder="비밀번호가 맞지 않습니다."
-            onChange={handleChange}
-          /> */}
         </div>
-        <button
-          type="submit"
-          data-testid="signup-button"
-          disabled={isSubmitDisabled}
-          onClick={signUpApi({form})}
-        >
-          회원가입
-        </button>
+        <div>
+          <button
+            className={`border rounded-lg box-border py-1 cursor-pointer w-full text-white ${isSubmitDisabled ? 'bg-gray-300' : 'bg-blue-800'}`}
+            type="submit"
+            data-testid="signup-button"
+            disabled={isSubmitDisabled}
+            onClick={() => signUpApi({form})}
+          >
+            회원가입
+          </button>
+        </div>
       </form>
     </div>
   );
 }
+

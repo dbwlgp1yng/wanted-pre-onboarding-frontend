@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function SignIn() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
 
   const handleRegisterBtnClick = (e) => {
     e.preventDefault();
@@ -47,7 +47,7 @@ export default function SignIn() {
         <div className="flex flex-col w-full mb-2">
           <label htmlFor="userEmail">Email</label>
           <input
-            className="border-2 px-2 py-1 text-sm"
+            className="border rounded-lg px-2 py-1 text-sm"
             type="text"
             id="userEmail"
             name="email"
@@ -60,7 +60,7 @@ export default function SignIn() {
         <div className="flex flex-col mb-2">
           <label htmlFor="userPassword">Password</label>
           <input
-           className="border-2 px-2 py-1 text-sm"
+            className="border rounded-lg px-2 py-1 text-sm"
             type="password"
             name="password"
             id="userPassword"
@@ -72,15 +72,14 @@ export default function SignIn() {
         </div>
         <div className="w-full">
           <button
-            className="border-2 box-border py-1 cursor-pointer w-1/2"
-            type="submit"
+            className={`border rounded-lg box-border py-1 cursor-pointer w-1/2 text-white ${isSubmitDisabled ? 'bg-gray-300' : 'bg-blue-800'}`}
             data-testid="signin-button"
             disabled={isSubmitDisabled}
           >
             Login
           </button>
           <button
-            className="border-2 py-1 cursor-pointer w-1/2"
+            className="border rounded-lg py-1 cursor-pointer w-1/2 bg-blue-800 text-white"
             type="button"
             onClick={handleRegisterBtnClick}
           >
