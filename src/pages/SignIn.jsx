@@ -60,7 +60,7 @@ export default function SignIn() {
     <div className="flex justify-center items-center w-full h-screen">
       <form className="flex flex-col w-1/4" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full mb-2">
-          <label htmlFor="userEmail">Email</label>
+          <label htmlFor="userEmail">이메일</label>
           <input
             className="border rounded-lg px-2 py-1 text-sm"
             type="text"
@@ -73,7 +73,7 @@ export default function SignIn() {
           />
         </div>
         <div className="flex flex-col mb-2">
-          <label htmlFor="userPassword">Password</label>
+          <label htmlFor="userPassword">비밀번호</label>
           <input
             className="border rounded-lg px-2 py-1 text-sm"
             type="password"
@@ -92,14 +92,14 @@ export default function SignIn() {
             disabled={isSubmitDisabled}
             onClick={() => signInApi({form})}
           >
-            Login
+            로그인
           </button>
           <button
             className="border rounded-lg py-1 cursor-pointer w-1/2 bg-blue-800 text-white"
             type="button"
             onClick={handleRegisterBtnClick}
           >
-            Register
+            회원가입
           </button>
         </div>
       </form>
