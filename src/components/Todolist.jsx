@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Todo from './Todo';
+import TodoItem from './TodoItem';
 import AddTodo from './AddTodo';
-
 
 export default function Todolist() {
   const [todos, setTodos] = useState([]);
@@ -15,12 +14,12 @@ export default function Todolist() {
   const handleDelete = (deleted) =>
     setTodos(todos.filter((t) => t.id !== deleted.id));
   return (
-    <section>
+    <section className='flex flex-col w-2/7 h-3/4 p-4 m-auto bg-slate-100'>
       <AddTodo onAdd={handleAdd} />
-      <ul>
+      <ul className='flex-1 overflow-y-auto mt-2'>
         {
           todos.map((item) => (
-            <Todo 
+            <TodoItem 
               key={item.id}
               todo={item}
               onUpdate={handleUpdate}
