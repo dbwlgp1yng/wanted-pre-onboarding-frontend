@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
 export default function TodoItem({ todo, onUpdate, onDelete }) {
-  const { text } = todo;
+  const text = todo.todo;
+  const [checked, setChecked] = useState(todo.isCompleted);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedText, setUpdatedText] = useState(text);
 
   const handleUpdate = () => {
-    onUpdate({ ...todo, text: updatedText });
+    onUpdate({ ...todo, todo: updatedText });
     setIsEditing(false);
     setUpdatedText(updatedText);
   };
@@ -20,13 +21,21 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
   };
   const handleDelete = () => onDelete(todo);
 
+  const handleCheckChange = () => {
+    setChecked((prevCheck) => {
+      onUpdate({ ...todo, isCompleted: !prevCheck });
+      return !prevCheck;
+    });
+  };
+
   return (
     <li className="flex justify-between py-2">
       <label>
         <input
           className="w-4 h-4"
           type="checkbox"
-          onChange={() => onUpdate({ ...todo })}
+          onChange={handleCheckChange}
+          checked={checked}
         />
         <span className="pl-4">
           {isEditing ? (  
@@ -45,19 +54,33 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
       <div>
         {isEditing ? (
           <>
-            <button className="mr-2" data-testid="submit-button" onClick={handleUpdate}>
+            <button 
+              className="mr-2" 
+              data-testid="submit-button" 
+              onClick={handleUpdate}
+            >
               제출
             </button>
-            <button data-testid="cancel-button" onClick={handleCancel}>
+            <button 
+              data-testid="cancel-button" 
+              onClick={handleCancel}
+            >
               취소
             </button>
           </>
         ) : (
           <>
-            <button className="mr-2" data-testid="modify-button" onClick={handleToggleEdit}>
+            <button 
+              className="mr-2" 
+              data-testid="modify-button" 
+              onClick={handleToggleEdit}
+            >
               수정
             </button>
-            <button data-testid="delete-button" onClick={handleDelete}>
+            <button 
+              data-testid="delete-button" 
+              onClick={handleDelete}
+            >
               삭제
             </button>
           </>

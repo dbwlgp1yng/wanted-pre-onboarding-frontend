@@ -43,9 +43,9 @@ export const deleteTodo = async (accessToken, id) => {
   const headers = {
     Authorization: `Bearer ${accessToken}`,
   };
-  await axios.delete(
+  const response = await axios.delete(
     `${API_BASE_URL}/todos/${id}`,
-    {}, 
     { headers: headers }
   );
+  return response.data;
 };
