@@ -57,9 +57,10 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-screen">
+    <div className="flex flex-col justify-center items-center w-full h-screen">
+      <h1 className="text-4xl font-bold mb-12 text-blue-700">Sign In</h1>
       <form className="flex flex-col w-1/4" onSubmit={handleSubmit}>
-        <div className="flex flex-col w-full mb-2">
+        <div className="flex flex-col w-full mb-4">
           <label htmlFor="userEmail">이메일</label>
           <input
             className="border rounded-lg px-2 py-1 text-sm"
@@ -72,7 +73,7 @@ export default function SignIn() {
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col mb-2">
+        <div className="flex flex-col mb-4">
           <label htmlFor="userPassword">비밀번호</label>
           <input
             className="border rounded-lg px-2 py-1 text-sm"
@@ -81,7 +82,7 @@ export default function SignIn() {
             id="userPassword"
             value={form.password}
             data-testid="password-input"
-            placeholder="비밀번호를 입력해주세요."
+            placeholder="비밀번호 8자리 이상 입력해주세요."
             onChange={handleChange}
           />
         </div>
