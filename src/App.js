@@ -3,7 +3,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Todo from './pages/Todo';
 
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 
 function App() {
@@ -40,14 +40,14 @@ function App() {
   }
   return (
     <>
-      <Router>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path='/' element={handleRootPath("/")} />
           <Route path='/signin' element={handleRootPath("/signin")} />
           <Route path='/signup' element={handleRootPath("/signup")} />
           <Route path='/todo' element={handleRootPath("/todo")} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </>
   );
 }
