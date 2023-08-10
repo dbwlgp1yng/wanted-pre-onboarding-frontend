@@ -46,14 +46,14 @@ export default function SignIn() {
       password: `${form.password}`,
     };
     API.post('/auth/signin', userData)
-        .then((response) => {
-            if(response.status === 200) {
-              const accessToken = response.data['access_token'];
-              localStorage.setItem("accessToken", accessToken);
-              navigate('/todo');
-            }
-        })
-        .catch((error) => console.log(error.response));
+      .then((response) => {
+        if(response.status === 200) {
+          const accessToken = response.data['access_token'];
+          localStorage.setItem("accessToken", accessToken);
+          window.location.replace('/todo')
+        }
+      })
+      .catch((error) => console.log(error.response));
   };
 
   return (

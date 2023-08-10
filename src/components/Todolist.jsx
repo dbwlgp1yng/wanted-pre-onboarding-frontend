@@ -6,7 +6,6 @@ import { createTodo, getTodos, updateTodo, deleteTodo } from '../utils/TodoAPI';
 export default function Todolist() {
   const [todos, setTodos] = useState([]);
   const accessToken = localStorage.getItem('accessToken');
-  console.log(todos)
   const fetchTodos = async () => {
     try {
       const response = await getTodos(accessToken);
@@ -29,7 +28,6 @@ export default function Todolist() {
   };
 
   const handleUpdate = async (updatedTodo) => {
-    console.log(updatedTodo)
     try {
       const updated = await updateTodo(accessToken, updatedTodo.id, {
         todo: updatedTodo.todo,
