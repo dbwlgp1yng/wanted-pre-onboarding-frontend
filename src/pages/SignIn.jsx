@@ -11,7 +11,6 @@ export default function SignIn() {
 
   const handleRegisterBtnClick = (e) => {
     e.preventDefault();
-    console.log("클릭");
     navigate('/signup');
   };
   const handleChange = (e) => {
