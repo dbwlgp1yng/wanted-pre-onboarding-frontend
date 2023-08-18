@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TodoItem from './TodoItem';
 import AddTodo from './AddTodo';
-import { createTodo, getTodos, updateTodo, deleteTodo } from '../utils/TodoAPI';
+import { createTodo, getTodos, updateTodo, deleteTodo } from '../api/TodoAPI';
 
 export default function Todolist() {
   const [todos, setTodos] = useState([]);

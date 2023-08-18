@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../utils/API";
+import API from "../api/API";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -90,7 +90,9 @@ export default function SignIn() {
             className={`border rounded-lg box-border py-1 cursor-pointer w-1/2 text-white ${isSubmitDisabled ? 'bg-gray-300' : 'bg-blue-800'}`}
             data-testid="signin-button"
             disabled={isSubmitDisabled}
-            onClick={() => signInApi({form})}
+            onClick={() => {
+              signInApi({form});
+            }}
           >
             로그인
           </button>
