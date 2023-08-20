@@ -21,23 +21,10 @@ export default function SignIn() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isEmailValid && isPasswordValid) {
-      console.log("유효성 검사 통과");
-    }
+    isSubmitDisabled && console.log("유효성 검사 통과");
   };
 
-  const validateEmail = () => {
-    const isValid = form.email.includes("@");
-    return isValid;
-  };
-  const validatePassword = () => {
-    const isValid = form.password.length >= 8;
-    return isValid;
-  };
-  const isEmailValid = validateEmail();
-  const isPasswordValid = validatePassword();
-
-  const isSubmitDisabled = !validateEmail() || !validatePassword();
+  const isSubmitDisabled = !form.email.includes("@") || form.password.length < 8;
 
   const signInApi = ({ form }) => {
     const userData = {

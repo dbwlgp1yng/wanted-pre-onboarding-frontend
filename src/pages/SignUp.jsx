@@ -19,15 +19,7 @@ export default function SignUp() {
     e.preventDefault();
   };
 
-  const validateEmail = () => {
-    const isValid = form.email.includes("@");
-    return isValid;
-  };
-  const validatePassword = () => {
-    const isValid = form.password.length >= 8;
-    return isValid;
-  };
-  const isSubmitDisabled = !validateEmail() || !validatePassword();
+  const isSubmitDisabled = !form.email.includes("@") || form.password.length < 8;
 
   const signUpApi = ({ form }) => {
     const userData = {

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 export default function AddTodo({ onAdd }) {
   const [text, setText] = useState("");
@@ -7,7 +6,7 @@ export default function AddTodo({ onAdd }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (text.trim().length === 0) return;
-    onAdd({ id: uuidv4(), text });
+    onAdd({ text });
     setText("");
   };
   return (
