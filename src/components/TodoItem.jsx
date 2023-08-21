@@ -16,7 +16,7 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
     setUpdatedText(text);
   };
   const handleToggleEdit = () => {
-    setIsEditing(!isEditing);
+    setIsEditing((isEditing) => !isEditing);
     setUpdatedText(text);
   };
   const handleDelete = () => onDelete(todo);

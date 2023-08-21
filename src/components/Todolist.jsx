@@ -6,12 +6,16 @@ import { createTodo, getTodos, updateTodo, deleteTodo } from '../api/TodoAPI';
 export default function Todolist() {
   const [todos, setTodos] = useState([]);
   const accessToken = localStorage.getItem('accessToken');
+
+  const handleError = (error, message) => {
+    console.error(`${message}:`, error);
+  };
   const fetchTodos = async () => {
     try {
       const response = await getTodos(accessToken);
       setTodos(response);
     } catch (error) {
-      console.error("Error fetching todos:", error);
+      handleError("Error fetching todos:", error);
     }
   };
   useEffect(() => {
@@ -23,7 +27,7 @@ export default function Todolist() {
       const newTodo = await createTodo(accessToken, todo.text);
       setTodos([...todos, newTodo]);
     } catch (error) {
-      console.error('Error creating todo:', error);
+      handleError('Error creating todo:', error);
     }
   };
 
@@ -37,7 +41,7 @@ export default function Todolist() {
         prevTodos.map((todo) => (todo.id === updated.id ? updated : todo))
       );
     } catch (error) {
-      console.error('Error updating todo:', error);
+      handleError('Error updating todo:', error);
     }
   };
 
@@ -48,9 +52,10 @@ export default function Todolist() {
         prevTodos.filter((todo) => todo.id !== deletedTodo.id)
       );
     } catch (error) {
-      console.error("Error deleting todo:", error);
+      handleError("Error deleting todo:", error);
     }
   };
+  
 
   return (
     <section className='flex flex-col w-2/7 h-3/4 p-4 m-auto bg-slate-100'>
